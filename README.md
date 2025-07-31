@@ -134,13 +134,13 @@ adb shell ping 8.8.8.8
 
 - Go to: `Proxy → Proxy Settings → Import/Export CA Certificate`
 - Export the certificate as **DER format**:
-- Choose a file (Select directory where to save ) to export the CA certeficate and save as 
+- Choose a file (Select directory where to save ) to export the CA certificate and save it as 
   `cert.der`
 
 
 ### 🔁 Convert DER to PEM
 
-Convert the exported DER certificate to `PEM` format and rename it according to its hash.  `First you have to move the directory where you save the CA certeficate as shown section` [Export Burp Certificate](#5-certificate-installation) 
+Convert the exported DER certificate to `PEM` format and rename it according to its hash.  `First you have to move the directory where you save the CA certificate as shown section` [Export Burp Certificate](#5-certificate-installation) 
 
 For **Windows (PowerShell or CMD)**:
 
@@ -243,5 +243,28 @@ adb shell settings put global http_proxy <your_ip>:8080
 adb shell "echo 'export HTTP_PROXY=http://<your_ip>:8080' >> /system/etc/profile"
 ```
 ---
+---
+
+## 11. Reference Materials
+
+- [Genymotion Documentation](https://docs.genymotion.com/)
+- [Burp Suite Documentation](https://portswigger.net/burp/documentation)
+- [ADB Command Reference](https://developer.android.com/studio/command-line/adb)
+- [VirtualBox Networking Guide](https://www.virtualbox.org/manual/ch06.html)
+
+---
+
+## 📄 License
+
+This project is released under the [MIT License](LICENSE).
+
+---
+
+## ✉️ Contact
+
+**Author:** Gashaw Kidanu  
+**Email:** kidanugashaw@gmail.com  
+**LinkedIn:** [linkedin.com/in/gashaw-kidanu](https://www)
+
 
 
