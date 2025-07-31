@@ -96,7 +96,7 @@ adb shell ping 8.8.8.8
 ### 🔧 Proxy Setup
 
 1. Open **Burp Suite**
-2. Go to `Proxy → Options`
+2. Go to `Proxy → Proxy Settings `
 3. Add a new proxy listener:
    - **Binding:** All interfaces
    - **Port:** `8080`
@@ -109,8 +109,9 @@ adb shell ping 8.8.8.8
 
 ### 📜 Export Burp Certificate
 
-- Go to: `Proxy → Options → Import/Export CA Certificate`
-- Export the certificate as **DER format**:  
+- Go to: `Proxy → Proxy Settings → Import/Export CA Certificate`
+- Export the certificate as **DER format**:
+- Choose a file (Select directory where to save ) to export the CA certeficate and save as 
   `cert.der`
 
 
