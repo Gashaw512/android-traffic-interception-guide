@@ -69,3 +69,6 @@ Add a few images or terminal screenshots here showing script execution and succe
 adb disable-verity
 adb reboot
 ```
+
+3. My emulator isn’t rooted. What now?
+>This tool requires root access to push certs to /system. Use Genymotion or rooted custom emulators.
