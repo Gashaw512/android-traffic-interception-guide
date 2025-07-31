@@ -54,7 +54,6 @@ bcdedit /set hypervisorlaunchtype off
 - Install **Git for Windows**
 - Install **Burp Suite**
 
----
 
 ### 📱 C. Create Android Virtual Device
 
@@ -63,6 +62,9 @@ bcdedit /set hypervisorlaunchtype off
    - **OS:** Android 11 (API 30)
    - **Model:** Google Pixel 4
    - **Image:** With Google Play Services
+  
+---
+
 ## 3. Network Configuration
 
 ### 📦 VirtualBox Settings
@@ -78,7 +80,7 @@ bcdedit /set hypervisorlaunchtype off
    - **Adapter 2:**
      - Attached to: `NAT`
 
----
+
 
 ### 🔍 Verify Genymotion Internet Access
 
@@ -100,6 +102,9 @@ adb shell ping 8.8.8.8
    - **Port:** `8080`
 4. Enable interception:
    - Navigate to: `Proxy → Intercept → ON`
+  
+---
+
 ## 5. Certificate Installation
 
 ### 📜 Export Burp Certificate
@@ -108,7 +113,7 @@ adb shell ping 8.8.8.8
 - Export the certificate as **DER format**:  
   `cert.der`
 
----
+
 
 ### 🔁 Convert DER to PEM
 
@@ -172,6 +177,7 @@ Expected output:
 List of devices attached
 192.168.XX.XXX:5555   device product:vbox86p model:Google_Pixel_4
 ```
+---
 ## 8. Troubleshooting
 
 | Issue               | Solution                                              |
