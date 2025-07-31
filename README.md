@@ -263,8 +263,8 @@ This project is released under the [MIT License](LICENSE).
 ## ✉️ Contact
 
 **Author:** Gashaw Kidanu  
-**Email:** kidanugashaw@gmail.com  
-**LinkedIn:** [linkedin.com/in/gashaw-kidanu](https://www)
+**Email:** kidanugashaw@gmail.com 
+**LinkedIn:** [linkedin.com/in/gashaw-kidanu](https://www.linkedin.com/in/gashaw-kidanu/)
 
 
 
