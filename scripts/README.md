@@ -1,38 +1,44 @@
 # 🔐 burpDrop – Burp CA Certificate Installer for Android Emulators
 
 ![Platform](https://img.shields.io/badge/Platform-Android%20Emulators-blue)
-![Shell](https://img.shields.io/badge/Shell-.sh%20%26%20.bat-green)
+![Shell](https://img.shields.io/badge/Shell-.sh%20%7C%20.bat-green)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 ![Author](https://img.shields.io/badge/Author-Gashaw%20Kidanu-orange)
 
-> Automate the conversion, backup, and installation of Burp Suite CA certificates into Android emulators with zero manual fuss.
+> Seamlessly install [Burp Suite](https://portswigger.net/burp) CA certificates into rooted Android emulators.  
+> Supports **Linux/macOS** and **Windows**, with automated conversion, backup, and deployment via ADB.
 
 ---
 
 ## ✨ Features
 
-- ✅ Linux/macOS (`burpDrop.sh`) and Windows (`burpDrop.bat`) support  
-- 📦 Backup of existing certs before overwrite  
-- 🧩 Automatic hash generation and PEM conversion  
-- ⚙️ ADB root access and `/system` remount handled internally  
-- 📜 Real-time logging and cleanup on exit
+- ✅ Dual OS support: `burpDrop.sh` (Linux/macOS) & `burpDrop.bat` (Windows)
+- 🔒 Converts Burp CA cert (DER → PEM → .0) with correct subject hash
+- 🔁 Pushes cert to `/system/etc/security/cacerts/` on emulator
+- 📦 Automatically backs up any existing cert with same hash
+- 🧰 Verifies ADB/openssl availability and emulator state
+- 🗂️ Logs installation history with timestamped logs
 
 ---
 
-## 💡 Usage
+## 📦 Requirements
 
-### 🔧 Requirements
-- Burp Suite (Export CA cert in **DER format**)  
-- [Android Platform Tools](https://developer.android.com/studio/releases/platform-tools)  
-- [OpenSSL](https://www.openssl.org/) in your system's `PATH`
+- **Burp Suite** installed (Community or Pro)
+- Burp CA certificate exported in **DER format** (`cert.der`)
+- [Android Platform Tools](https://developer.android.com/studio/releases/platform-tools) (`adb`)
+- [OpenSSL](https://www.openssl.org/) available in your `PATH`
+- Rooted Android emulator (e.g., [Genymotion](https://www.genymotion.com/))
 
 ---
 
-### 🐧 Linux/macOS Instructions
+## 🚀 Quick Start
+
+### 🐧 Linux/macOS
 
 ```bash
 chmod +x burpDrop.sh
-./burpDrop.sh
+./burpDrop.sh cert.der
+
 ```
 
 ### 🪟 Windows Instructions
