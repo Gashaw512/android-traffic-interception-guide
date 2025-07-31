@@ -6,20 +6,33 @@ A step-by-step walkthrough to intercept and analyze Android app traffic using Ge
 
 ## 📋 Table of Contents
 
-1. [System Requirements](#1-system-requirements)  
-2. [Initial Setup](#2-initial-setup)  
-3. [Network Configuration](#3-network-configuration)  
-4. [Burp Suite Configuration](#4-burp-suite-configuration)  
-5. [Certificate Installation](#5-certificate-installation)  
-6. [Proxy Configuration](#6-proxy-configuration)  
-7. [Testing & Verification](#7-testing--verification)  
-8. [Troubleshooting](#8-troubleshooting)  
-9. [Advanced Configuration](#9-advanced-configuration)  
-10. [Reference Materials](#10-reference-materials)  
+1. [Prerequisites & Assumptions](#1-prerequisites--assumptions) 
+2. [System Requirements](#2-system-requirements)  
+3. [Initial Setup](#3-initial-setup)  
+4. [Network Configuration](#4-network-configuration)  
+5. [Burp Suite Configuration](#5-burp-suite-configuration)  
+6. [Certificate Installation](#6-certificate-installation)  
+7. [Proxy Configuration](#7-proxy-configuration)  
+8. [Testing & Verification](#8-testing--verification)  
+9. [Troubleshooting](#9-troubleshooting)  
+10. [Advanced Configuration](#10-advanced-configuration)  
+11. [Reference Materials](#11-reference-materials)  
 
 ---
 
-## 1. System Requirements
+## 1. Prerequisites & Assumptions
+
+Before using this guide, it is assumed that you:
+
+- Have basic familiarity with **ADB (Android Debug Bridge)** commands
+- Are comfortable with **command-line interfaces** (e.g., PowerShell, CMD, Git Bash, or Terminal)
+- Understand **proxy setup** concepts and network interception tools like Burp Suite
+- Have **admin privileges** on your Windows machine (to disable Hyper-V and configure networking)
+- Are using this guide **in a lab or authorized testing environment** only
+
+---
+
+## 2. System Requirements
 
 ### ✅ Essential Components:
 
@@ -38,7 +51,7 @@ A step-by-step walkthrough to intercept and analyze Android app traffic using Ge
 
 ---
 
-## 2. Initial Setup
+## 3. Initial Setup
 
 ### A. Disable Hyper-V (Windows Only)
 
@@ -65,7 +78,7 @@ bcdedit /set hypervisorlaunchtype off
   
 ---
 
-## 3. Network Configuration
+## 4. Network Configuration
 
 ### 📦 VirtualBox Settings
 
@@ -91,7 +104,7 @@ adb shell ping 8.8.8.8
 
 ---
 
-## 4. Burp Suite Configuration
+## 5. Burp Suite Configuration
 
 ### 🔧 Proxy Setup
 
@@ -105,7 +118,7 @@ adb shell ping 8.8.8.8
   
 ---
 
-## 5. Certificate Installation
+## 6. Certificate Installation
 
 ### 📜 Export Burp Certificate
 
@@ -117,7 +130,7 @@ adb shell ping 8.8.8.8
 
 ### 🔁 Convert DER to PEM
 
-Convert the exported DER certificate to `PEM` format and rename it according to its hash.  `First you have to move the directory where you save the CA certeficate as shown section [Export Burp Certificate](#5-certificate-installation) `
+Convert the exported DER certificate to `PEM` format and rename it according to its hash.  `First you have to move the directory where you save the CA certeficate as shown section` [Export Burp Certificate](#5-certificate-installation) 
 
 For **Windows (PowerShell or CMD)**:
 
@@ -136,12 +149,12 @@ mv burp.pem 9a5ba575.0
 ```bash
 adb root  
 adb remount  
-adb push 9a5ba575.0 /system/etc/security/cacerts
+adb push 9a5ba575.0 /system/etc/security/cacerts/
 adb shell chmod 644 /system/etc/security/cacerts/9a5ba575.0
 adb reboot
 ```
 ---
-## 6. Proxy Configuration
+## 7. Proxy Configuration
 
 ### 🧭 Option 1: Use Host IP (Recommended)
 
@@ -167,7 +180,7 @@ adb shell settings put global http_proxy :0
 
 ```
 ---
-## 7. Testing & Verification
+## 8. Testing & Verification
 
 ### ✅ Basic Connection Tests
 
@@ -194,7 +207,7 @@ List of devices attached
 192.168.XX.XXX:5555   device product:vbox86p model:Google_Pixel_4
 ```
 ---
-## 8. Troubleshooting
+## 9. Troubleshooting
 
 | Issue               | Solution                                              |
 |---------------------|-------------------------------------------------------|
@@ -206,7 +219,7 @@ List of devices attached
 | **App bypasses proxy** | Use ProxyDroid or configure iptables manually          |
 
 ---
-## 9. Advanced Configuration
+## 10. Advanced Configuration
 
 ### 🧪 A. Bypass Certificate Pinning with Frida
 
@@ -219,5 +232,15 @@ frida -U -f com.target.app -l ssl-pin-bypass.js
 adb shell settings put global http_proxy <your_ip>:8080
 adb shell "echo 'export HTTP_PROXY=http://<your_ip>:8080' >> /system/etc/profile"
 ```
+---
+
+## 11. ⚠️ Security Notice / Disclaimer
+
+> ⚠️ **Security Notice**  
+> This guide is intended strictly for **authorized penetration testing**, **security research**, and **educational purposes** only.  
+> You must have explicit permission before intercepting traffic from any application, device, or network.
+>
+> Unauthorized interception or tampering with network traffic **may be illegal and unethical**.  
+> The author does **not take any responsibility** for misuse of this material.
 
 
