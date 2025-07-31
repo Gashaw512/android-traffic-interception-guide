@@ -15,8 +15,9 @@ A step-by-step walkthrough to intercept and analyze Android app traffic using Ge
 7. [Proxy Configuration](#7-proxy-configuration)  
 8. [Testing & Verification](#8-testing--verification)  
 9. [Troubleshooting](#9-troubleshooting)  
-10. [Advanced Configuration](#10-advanced-configuration)  
-11. [Reference Materials](#11-reference-materials)  
+10. [Advanced Configuration](#10-advanced-configuration)
+11. [Security Notice / Disclaimer]
+12. [Reference Materials](#11-reference-materials)  
 
 ---
 
@@ -234,7 +235,7 @@ adb shell "echo 'export HTTP_PROXY=http://<your_ip>:8080' >> /system/etc/profile
 ```
 ---
 
-## 11. ⚠️ Security Notice / Disclaimer
+## 11. Security Notice / Disclaimer
 
 > ⚠️ **Security Notice**  
 > This guide is intended strictly for **authorized penetration testing**, **security research**, and **educational purposes** only.  
