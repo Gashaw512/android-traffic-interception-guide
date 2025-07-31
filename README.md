@@ -16,7 +16,7 @@ A step-by-step walkthrough to intercept and analyze Android app traffic using Ge
 8. [Testing & Verification](#8-testing--verification)  
 9. [Troubleshooting](#9-troubleshooting)  
 10. [Advanced Configuration](#10-advanced-configuration)
-11. [Security Notice / Disclaimer]
+11. [Security Notice / Disclaimer](#11-security-disclaimar)
 12. [Reference Materials](#11-reference-materials)  
 
 ---
