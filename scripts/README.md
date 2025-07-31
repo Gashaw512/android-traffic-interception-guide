@@ -46,7 +46,7 @@ chmod +x burpDrop.sh
 burpDrop.bat
 
 ```
-
+> Replace cert.der with the filename of your exported CA certificate.
 ### 📁 Project Structure
 
 burpDrop/
