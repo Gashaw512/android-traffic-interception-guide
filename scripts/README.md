@@ -59,12 +59,11 @@ Add a few images or terminal screenshots here showing script execution and succe
 
 ### ❓ FAQ
 1. How do I export the certificate from Burp?
- > Go to Proxy → Proxy Settings → Import/Export CA Certificate
-  > Choose DER format and save as cert.der
-  
-4. Go to Proxy > Options > CA Certificate > Export and select DER format.
+  > Go to Proxy → Proxy Settings → Import/Export CA Certificate   
 
-5. Why does ADB remount fail? Verify the emulator supports root access (adb root). Genymotion typically works out of the box. For AVDs, you may need:
+  > Choose DER format and save as cert.der
+
+2. Why does ADB remount fail? Verify the emulator supports root access (adb root). Genymotion typically works out of the box. For AVDs, you may need:
 
 ```bash
 adb disable-verity
