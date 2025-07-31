@@ -110,10 +110,92 @@ adb shell ping 8.8.8.8
 
 ---
 
-### 🔁 Convert DER to PEM (Using Git Bash)
+### 🔁 Convert DER to PEM
 
 ```bash
 openssl x509 -inform der -in cert.der -out burp.pem
-HASH=$(openssl x509 -inform pem -subject_hash_old -in burp.pem | head -1)
-mv burp.pem ${HASH}.0
+openssl x509 -inform pem -subject_hash_old -in burp.pem
+ren burp.pem 9a5ba575.0
+```
+### 📲 Push Certificate to Android Device (Emulator)
+```bash
+adb root  
+adb remount  
+adb push 9a5ba575.0 /system/etc/security/cacerts
+adb shell chmod 644 /system/etc/security/cacerts/9a5ba575.0
+adb reboot
+```
+---
+## 6. Proxy Configuration
+
+### 🧭 Option 1: Use Host IP (Recommended)
+
+```bash
+ipconfig | findstr "IPv4"
+adb shell settings put global http_proxy <your_host_ip>:8080
+```
+### 🔁 Option 2: Using Localhost (Alternative)
+```bash
+adb shell settings put global http_proxy 127.0.0.1:3333
+adb reverse tcp:3333 tcp:8080
+```
+### ❌ Disable Proxy
+```bash
+
+adb shell settings put global http_proxy :0
+
+```
+---
+## 7. Testing & Verification
+
+### ✅ Basic Connection Tests
+
+```bash
+adb shell curl -v http://example.com
+adb shell curl -v https://example.com
+
+```
+### 🔍 Verification Checklist
+
+- ✅ Burp intercepts **HTTP** traffic  
+- ✅ Burp intercepts **HTTPS** traffic  
+- ✅ No SSL warnings in the device browser  
+- ✅ Certificate appears under:  
+  `Settings → Security → Trusted credentials`
+### 🔗 ADB Connection Check
+
+```bash
+adb devices -l
+```
+Expected output:
+```arduino
+List of devices attached
+192.168.XX.XXX:5555   device product:vbox86p model:Google_Pixel_4
+```
+## 8. Troubleshooting
+
+| Issue               | Solution                                              |
+|---------------------|-------------------------------------------------------|
+| **No traffic in Burp** | 1. Verify proxy IP<br>2. Check firewall<br>3. Ping host from ADB |
+| **SSL errors**         | 1. Reinstall certificate<br>2. Check certificate permissions<br>3. Verify device system time |
+| **adb remount fails**  | Run: `adb disable-verity` then `adb reboot`           |
+| **Network unreachable**| Check VirtualBox → Bridged adapter settings            |
+| **OpenSSL errors**     | Use Git Bash, not Windows CMD                          |
+| **App bypasses proxy** | Use ProxyDroid or configure iptables manually          |
+
+---
+## 9. Advanced Configuration
+
+### 🧪 A. Bypass Certificate Pinning with Frida
+
+```bash
+pip install frida-tools
+frida -U -f com.target.app -l ssl-pin-bypass.js
+```
+### 🔁 B. Persistent Proxy Setup
+```bash
+adb shell settings put global http_proxy <your_ip>:8080
+adb shell "echo 'export HTTP_PROXY=http://<your_ip>:8080' >> /system/etc/profile"
+```
+
 
