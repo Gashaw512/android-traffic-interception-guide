@@ -1,54 +1,62 @@
 # 📡 Comprehensive Guide: Intercepting Android App Traffic with Genymotion & Burp Suite
 
-A step-by-step walkthrough to intercept and analyze Android app traffic using Genymotion emulator, Burp Suite proxy, and VirtualBox. Ideal for security researchers, pentesters, and developers.
+A step-by-step walkthrough to intercept and analyze Android app traffic using **Genymotion**, **Burp Suite**, and **VirtualBox**.  
+Ideal for penetration testers, security researchers, and developers working in controlled environments.
+
+---
+
+> ⚠️ **Security Notice**  
+> This guide is intended strictly for **authorized penetration testing**, **security research**, and **educational purposes only**.  
+> Ensure you have explicit permission before intercepting traffic from any application, device, or network.  
+> Unauthorized interception may be **illegal** and **unethical**. The author assumes **no responsibility** for misuse.
 
 ---
 
 ## 📋 Table of Contents
 
-1. [Prerequisites & Assumptions](#1-prerequisites--assumptions) 
-2. [System Requirements](#2-system-requirements)  
-3. [Initial Setup](#3-initial-setup)  
-4. [Network Configuration](#4-network-configuration)  
-5. [Burp Suite Configuration](#5-burp-suite-configuration)  
-6. [Certificate Installation](#6-certificate-installation)  
-7. [Proxy Configuration](#7-proxy-configuration)  
-8. [Testing & Verification](#8-testing--verification)  
-9. [Troubleshooting](#9-troubleshooting)  
-10. [Advanced Configuration](#10-advanced-configuration)
-11. [Security Notice / Disclaimer](#11-security-disclaimar)
-12. [Reference Materials](#11-reference-materials)  
+1. [System Requirements](#1-system-requirements)  
+2. [Prerequisites & Assumptions](#-prerequisites--assumptions)  
+3. [Initial Setup](#2-initial-setup)  
+4. [Network Configuration](#3-network-configuration)  
+5. [Burp Suite Configuration](#4-burp-suite-configuration)  
+6. [Certificate Installation](#5-certificate-installation)  
+7. [Proxy Configuration](#6-proxy-configuration)  
+8. [Testing & Verification](#7-testing--verification)  
+9. [Troubleshooting](#8-troubleshooting)  
+10. [Advanced Configuration](#9-advanced-configuration)  
+11. [Reference Materials](#10-reference-materials)  
+12. [License](#license)
 
 ---
 
-## 1. Prerequisites & Assumptions
-
-Before using this guide, it is assumed that you:
-
-- Have basic familiarity with **ADB (Android Debug Bridge)** commands
-- Are comfortable with **command-line interfaces** (e.g., PowerShell, CMD, Git Bash, or Terminal)
-- Understand **proxy setup** concepts and network interception tools like Burp Suite
-- Have **admin privileges** on your Windows machine (to disable Hyper-V and configure networking)
-- Are using this guide **in a lab or authorized testing environment** only
-
----
-
-## 2. System Requirements
+## 1. System Requirements
 
 ### ✅ Essential Components:
 
 - **Host OS:** Windows 10/11 (64-bit)  
 - **VirtualBox:** Latest version → [Download](https://www.virtualbox.org/)  
 - **Genymotion:** Android emulator → [Download](https://www.genymotion.com/)  
-- **Burp Suite:** Community or Pro → [Download](https://portswigger.net/burp)  
+- **Burp Suite:** Community or Professional → [Download](https://portswigger.net/burp)  
 - **Git for Windows:** Includes OpenSSL tools → [Download](https://git-scm.com/)
 
 ### 💻 Recommended Specs:
 
-- **CPU:** Quad-core (Intel VT-x/AMD-V enabled)  
-- **RAM:** 8GB+ (4GB allocated to Genymotion)  
+- **CPU:** Quad-core (Intel VT-x / AMD-V enabled)  
+- **RAM:** 8GB+ (allocate 4GB to Genymotion)  
 - **Storage:** 20GB free space  
 - **Network:** Stable internet connection
+
+---
+
+## 2. Prerequisites & Assumptions
+
+Before following this guide, make sure you:
+
+- Understand basic **ADB** usage  
+- Know how to work in a **command-line environment** (PowerShell, Git Bash, Terminal)  
+- Understand **proxy setup** and **HTTPS interception**  
+- Have **admin rights** on your system  
+- Are working in a **controlled, authorized test environment**
 
 ---
 
@@ -58,6 +66,7 @@ Before using this guide, it is assumed that you:
 
 ```bash
 bcdedit /set hypervisorlaunchtype off
+
 ```
 ✅ Restart your computer afterward.
 
@@ -234,14 +243,5 @@ adb shell settings put global http_proxy <your_ip>:8080
 adb shell "echo 'export HTTP_PROXY=http://<your_ip>:8080' >> /system/etc/profile"
 ```
 ---
-
-## 11. Security Notice / Disclaimer
-
-> ⚠️ **Security Notice**  
-> This guide is intended strictly for **authorized penetration testing**, **security research**, and **educational purposes** only.  
-> You must have explicit permission before intercepting traffic from any application, device, or network.
->
-> Unauthorized interception or tampering with network traffic **may be illegal and unethical**.  
-> The author does **not take any responsibility** for misuse of this material.
 
 
