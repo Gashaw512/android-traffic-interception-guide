@@ -117,7 +117,7 @@ adb shell ping 8.8.8.8
 
 ### 🔁 Convert DER to PEM
 
-Convert the exported DER certificate to PEM format and rename it according to its hash. First you have to move the directory where you save the CA certeficate as shown section [Export Burp Certificate](#5-certificate-installation) 
+Convert the exported DER certificate to `PEM` format and rename it according to its hash.  `First you have to move the directory where you save the CA certeficate as shown section [Export Burp Certificate](#5-certificate-installation) `
 
 For **Windows (PowerShell or CMD)**:
 
