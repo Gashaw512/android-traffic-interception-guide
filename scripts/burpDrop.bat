@@ -1,68 +1,38 @@
 @echo off
-setlocal enabledelayedexpansion
+setlocal
 
-:: burpDrop.bat
-:: Author: Gashaw Kidanu
-:: Version: 1.0
-:: Description: Automates pushing Burp CA cert to Android emulator on Windows
+:: burpdrop.bat
+:: Launcher script for burpDrop.py on Windows.
 
-set "LOGDIR=logs"
-if not exist "%LOGDIR%" mkdir "%LOGDIR%"
-set "LOGFILE=%LOGDIR%\install-%DATE:/=-%_%TIME::=-%.log"
+:: Get the directory where this batch script is located
+set "SCRIPT_DIR=%~dp0"
 
-echo [INFO] Logging to %LOGFILE%
+:: Path to the main Python script
+set "PYTHON_SCRIPT=%SCRIPT_DIR%burpDrop.py"
 
-:: ============ Dependency Check ============ ::
-where adb >nul 2>&1 || (
-    echo [ERROR] adb not found. Please install Android Platform Tools and add them to PATH.
-    exit /b 1
-)
-where openssl >nul 2>&1 || (
-    echo [ERROR] openssl not found. Please install OpenSSL and add it to PATH.
-    exit /b 1
+:: --- Check for Python ---
+where python >nul 2>&1
+if %errorlevel% neq 0 (
+    echo ❌ Error: Python is not found in your PATH.
+    echo Please install Python and ensure it's accessible.
+    goto :eof
 )
 
-:: ============ Get Cert File ============ ::
-set /p CERT="Enter full path to cert.der: "
-if not exist "%CERT%" (
-    echo [ERROR] File not found: %CERT%
-    exit /b 1
-)
+:: --- Install Python Dependencies (Optional but Recommended) ---
+:: This part can be uncommented if you want the launcher to
+:: automatically install dependencies if they are missing.
+:: However, for a cleaner setup, it's often better to instruct
+:: the user to run 'pip install -r requirements.txt' manually.
+::
+:: echo Installing/updating Python dependencies...
+:: python -m pip install -r "%SCRIPT_DIR%requirements.txt"
+:: if %errorlevel% neq 0 (
+::     echo ❌ Failed to install Python dependencies. Please run 'pip install -r requirements.txt' manually.
+::     goto :eof
+:: )
 
-:: ============ Convert to PEM and Hash ============ ::
-set "TEMPDIR=%TEMP%\burpcert_%RANDOM%"
-mkdir "%TEMPDIR%"
-set "PEMFILE=%TEMPDIR%\burp.pem"
+:: --- Execute the Python script ---
+echo 🚀 Launching burpDrop...
+python "%PYTHON_SCRIPT%" %*
 
-openssl x509 -inform der -in "%CERT%" -out "%PEMFILE%" || (
-    echo [ERROR] Failed to convert certificate.
-    exit /b 1
-)
-
-for /f %%A in ('openssl x509 -subject_hash_old -in "%PEMFILE%"') do (
-    set "CERTNAME=%%A.0"
-)
-
-ren "%PEMFILE%" "!CERTNAME!"
-
-:: ============ ADB Steps ============ ::
-echo [INFO] Checking ADB connection...
-adb get-state | findstr /i "device" >nul || (
-    echo [ERROR] No device detected. Please ensure emulator is running.
-    exit /b 1
-)
-
-adb root
-adb remount
-
-:: ============ Backup Old Cert ============ ::
-adb shell "if [ -f /system/etc/security/cacerts/!CERTNAME! ]; then cp /system/etc/security/cacerts/!CERTNAME! /system/etc/security/cacerts/!CERTNAME!.backup.%DATE:/=-%_%TIME::=-%; fi"
-
-:: ============ Push New Cert ============ ::
-adb push "%TEMPDIR%\!CERTNAME!" /system/etc/security/cacerts/
-adb shell chmod 644 /system/etc/security/cacerts/!CERTNAME!
-adb reboot
-
-echo [INFO] Installation complete! Pushed as !CERTNAME!
-rd /s /q "%TEMPDIR%"
-echo [INFO] Please wait for the emulator to reboot.
+endlocal
