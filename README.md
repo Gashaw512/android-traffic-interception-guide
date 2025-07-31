@@ -1,6 +1,6 @@
 # 📡 Comprehensive Guide: Intercepting Android App Traffic with Genymotion & Burp Suite
 
-This repository provides a complete walkthrough for intercepting Android app traffic using **Genymotion**, **Burp Suite**, and **VirtualBox**. Designed for penetration testers, researchers, and developers seeking to analyze mobile app network activity.
+A step-by-step walkthrough to intercept and analyze Android app traffic using Genymotion emulator, Burp Suite proxy, and VirtualBox. Ideal for security researchers, pentesters, and developers.
 
 ---
 
@@ -114,13 +114,22 @@ adb shell ping 8.8.8.8
   `cert.der`
 
 
-
 ### 🔁 Convert DER to PEM
 
-```bash
+Convert the exported DER certificate to PEM format and rename it according to its hash.
+
+For **Windows (PowerShell or CMD)**:
+
+```powershell
 openssl x509 -inform der -in cert.der -out burp.pem
-openssl x509 -inform pem -subject_hash_old -in burp.pem
 ren burp.pem 9a5ba575.0
+```
+For **Git Bash, Linux, or macOS**:
+```bash
+
+openssl x509 -inform der -in cert.der -out burp.pem
+mv burp.pem 9a5ba575.0
+
 ```
 ### 📲 Push Certificate to Android Device (Emulator)
 ```bash
@@ -135,16 +144,22 @@ adb reboot
 
 ### 🧭 Option 1: Use Host IP (Recommended)
 
+Find your host machine's IP address and set it as the proxy for the emulator:
+
 ```bash
 ipconfig | findstr "IPv4"
 adb shell settings put global http_proxy <your_host_ip>:8080
 ```
+Replace <your_host_ip> with the IP address of your host machine.
+
 ### 🔁 Option 2: Using Localhost (Alternative)
+If you prefer to use localhost, set the proxy and reverse the ports:
 ```bash
 adb shell settings put global http_proxy 127.0.0.1:3333
 adb reverse tcp:3333 tcp:8080
 ```
 ### ❌ Disable Proxy
+To disable the proxy on the emulator:
 ```bash
 
 adb shell settings put global http_proxy :0
