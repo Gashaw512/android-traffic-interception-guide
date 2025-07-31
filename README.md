@@ -15,9 +15,9 @@ Ideal for penetration testers, security researchers, and developers working in c
 ## 📋 Table of Contents
 
 1. [System Requirements](#1-system-requirements)  
-2. [Prerequisites & Assumptions](#-prerequisites--assumptions)  
-3. [Initial Setup](#2-initial-setup)  
-4. [Network Configuration](#3-network-configuration)  
+2. [Prerequisites & Assumptions](#2-prerequisites--assumptions)  
+3. [Initial Setup](#3-initial-setup)  
+4. [Network Configuration](#4-network-configuration)  
 5. [Burp Suite Configuration](#4-burp-suite-configuration)  
 6. [Certificate Installation](#5-certificate-installation)  
 7. [Proxy Configuration](#6-proxy-configuration)  
