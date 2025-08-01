@@ -1,0 +1,9 @@
+README.md
+burpDrop.py
+setup.py
+burpdrop.egg-info/PKG-INFO
+burpdrop.egg-info/SOURCES.txt
+burpdrop.egg-info/dependency_links.txt
+burpdrop.egg-info/entry_points.txt
+burpdrop.egg-info/requires.txt
+burpdrop.egg-info/top_level.txt
