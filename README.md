@@ -1,3 +1,6 @@
+
+🔧 Tooling Note: See (/scripts/burpDrop) for the automated certificate installer for Android devices.
+
 # 📡 Comprehensive Guide: Intercepting Android App Traffic with Genymotion & Burp Suite
 
 A step-by-step walkthrough to intercept and analyze Android app traffic using **Genymotion**, **Burp Suite**, and **VirtualBox**.  
