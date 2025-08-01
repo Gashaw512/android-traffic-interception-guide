@@ -1,5 +1,4 @@
-
-> 🔧 Tooling Note: [See](/scripts/) for the automated certificate installer for Android devices.
+                      > 🔧 Tooling Note: [See](/scripts/README.md) for the automated certificate installer for Android devices.
 
 # 📡 Comprehensive Guide: Intercepting Android App Traffic with Genymotion & Burp Suite
 
@@ -170,7 +169,7 @@ adb reboot
 
 #### Automated Solution (burpDrop)
 
-` For a faster, automated approach, use [burpDrop](/scripts/) - our purpose-built tool that automates certificate conversion and installation:
+` For a faster, automated approach`, use [burpDrop](/scripts/) - `our purpose-built tool that automates certificate conversion and installation:
 `
 ##### Installation:
 ```bash
