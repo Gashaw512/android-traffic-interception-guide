@@ -1,4 +1,4 @@
-`🔧 Tooling Note: ` [See](/scripts/README.md) `for the automated certificate installer for Android devices.`
+`🔧 Tooling Note: ` [See /scripts/README.md](/scripts/README.md) `for the automated certificate installer for Android devices.`
 
 # 📡 Comprehensive Guide: Intercepting Android App Traffic with Genymotion & Burp Suite
 
