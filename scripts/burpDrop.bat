@@ -1,38 +1,35 @@
 @echo off
 setlocal
 
-:: burpdrop.bat
-:: Launcher script for burpDrop.py on Windows.
+:: Set UTF-8 support
+chcp 65001 > nul
+set PYTHONUTF8=1
 
-:: Get the directory where this batch script is located
+:: Get script directory
 set "SCRIPT_DIR=%~dp0"
 
-:: Path to the main Python script
+:: Path to Python script
 set "PYTHON_SCRIPT=%SCRIPT_DIR%burpDrop.py"
 
-:: --- Check for Python ---
+:: Check for Python
 where python >nul 2>&1
 if %errorlevel% neq 0 (
-    echo ❌ Error: Python is not found in your PATH.
-    echo Please install Python and ensure it's accessible.
+    echo ❌ Error: Python not found in PATH
+    echo Please install Python: https://www.python.org/downloads/
+    pause
     goto :eof
 )
 
-:: --- Install Python Dependencies (Optional but Recommended) ---
-:: This part can be uncommented if you want the launcher to
-:: automatically install dependencies if they are missing.
-:: However, for a cleaner setup, it's often better to instruct
-:: the user to run 'pip install -r requirements.txt' manually.
-::
-:: echo Installing/updating Python dependencies...
-:: python -m pip install -r "%SCRIPT_DIR%requirements.txt"
-:: if %errorlevel% neq 0 (
-::     echo ❌ Failed to install Python dependencies. Please run 'pip install -r requirements.txt' manually.
-::     goto :eof
-:: )
+:: Check dependencies
+echo Checking dependencies...
+python -m pip install -r "%SCRIPT_DIR%requirements.txt" > nul 2>&1
+if %errorlevel% neq 0 (
+    echo ⚠ Warning: Failed to install some dependencies
+    echo Continuing anyway...
+)
 
-:: --- Execute the Python script ---
-echo 🚀 Launching burpDrop...
+:: Launch application
+echo 🚀 Starting burpDrop...
 python "%PYTHON_SCRIPT%" %*
 
 endlocal
