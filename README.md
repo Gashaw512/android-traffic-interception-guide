@@ -1,5 +1,5 @@
 
-🔧 Tooling Note: [See](/scripts/) for the automated certificate installer for Android devices.
+######### > 🔧 Tooling Note: [See](/scripts/) for the automated certificate installer for Android devices.
 
 # 📡 Comprehensive Guide: Intercepting Android App Traffic with Genymotion & Burp Suite
 
@@ -166,7 +166,34 @@ adb push 9a5ba575.0 /system/etc/security/cacerts/
 adb shell chmod 644 /system/etc/security/cacerts/9a5ba575.0
 adb reboot
 ```
+
+
+#### Automated Solution (burpDrop)
+
+``` txt
+For a faster, automated approach, use [burpDrop](/scripts/) - our purpose-built tool that automates certificate conversion and installation:
+```
+##### Installation:
+```bash
+pip install burpdrop
+```
+##### Usage:
+```bash
+# Interactive install
+burpdrop install
+
+# Direct path install
+burpdrop install -c "/path/to/burp.der"
+
+# View logs
+burpdrop logs
+
+# Run diagnostics
+burpdrop diagnose
+```
+> 📘 Full Documentation: See (scripts/README.md) for complete burpDrop documentation.
 ---
+
 ## 7. Proxy Configuration
 
 ### 🧭 Option 1: Use Host IP (Recommended)
