@@ -109,42 +109,6 @@ burpdrop help
 
 ```
 
-
-graph TD
-    A[User] -->|Runs| B[burpDrop]
-    B --> C[Certificate Module]
-    B --> D[ADB Operations]
-    B --> E[Logging System]
-    
-    subgraph Certificate Module
-        C1[DER Input] --> C2[OpenSSL Conversion]
-        C2 --> C3[Hash Generation]
-        C3 --> C4[Android-compatible .0 File]
-    end
-    
-    subgraph ADB Operations
-        D1[Device Detection] --> D2[Root Access]
-        D2 --> D3[/system Remount]
-        D3 --> D4[Certificate Push]
-        D4 --> D5[Permissions Set]
-        D5 --> D6[Device Reboot]
-    end
-    
-    subgraph Logging System
-        E1[Timestamped Logs] --> E2[Installation Tracking]
-        E2 --> E3[Error Reporting]
-    end
-    
-    C4 --> D4
-    D --> F[Android Device]
-    E --> G[Logs Directory]
-    
-    style A fill:#4CAF50,stroke:#388E3C
-    style B fill:#2196F3,stroke:#0D47A1
-    style F fill:#FF9800,stroke:#F57C00
-    style G fill:#9C27B0,stroke:#6A1B9A
-
-
 ---
 ## ⚠️ Troubleshooting
 
