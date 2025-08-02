@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "burpdrop"
+version = "1.1.0"
+authors = [
+  { name="Gashaw Kidanu", email="kidanugashaw@gmail.com" },
+]
+description = "A cross-platform Burp Suite CA Certificate installer for Android devices"
+readme = "README.md"
+requires-python = ">=3.7"
+license = { file = "../LICENSE" }
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Topic :: Security",
+    "Topic :: Utilities",
+]
+keywords = ["android", "burpsuite", "certificate", "installer", "root", "magisk", "interception", "security"]
+
+[project.urls]
+"Homepage" = "https://github.com/Gashaw512/android-traffic-interception-guide"
+"Bug Tracker" = "https://github.com/Gashaw512/android-traffic-interception-guide/issues"
+
+[project.scripts]
+burpdrop = "scripts.main:main"
