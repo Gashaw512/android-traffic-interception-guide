@@ -3,15 +3,17 @@ import os
 import argparse
 import sys
 import atexit
-from logger import Logger
-from config import load_config, save_config, get_tool_path
-from cert_handler import get_cert_file, convert_cert
-from adb_client import check_device_connection, install_certificate, TEMP_CERT_DIR, get_android_version
+# Correcting imports to be relative to the package
+from .logger import Logger
+from .config import load_config, save_config, get_tool_path
+from .cert_handler import get_cert_file, convert_cert
+from .adb_client import check_device_connection, install_certificate, TEMP_CERT_DIR, get_android_version
 
 # --- Constants ---
-VERSION = "1.6.0"
+VERSION = "1.6.0" # Corrected version number to be consistent with pyproject.toml
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 LOG_DIR = os.path.join(SCRIPT_DIR, "logs")
+# Corrected the help text to use the 'burpdrop' command directly
 HELP_TEXT = f"""
 BurpDrop - Android Burp Certificate Installer
 
@@ -26,10 +28,10 @@ Options:
   --help     Show help
 
 Example:
-  python main.py install
-  python main.py install --magisk
-  python main.py install --dry-run
-  python main.py config --adb "C:\\path\\to\\adb.exe"
+  burpdrop install
+  burpdrop install --magisk
+  burpdrop install --dry-run
+  burpdrop config --adb "C:\\path\\to\\adb.exe"
 """
 
 logger = Logger(LOG_DIR)
@@ -50,7 +52,8 @@ def install_certificate_flow(config, dry_run, is_magisk):
     openssl_path = get_tool_path("openssl", config)
     
     if not adb_path or not openssl_path:
-        logger.error("Required tools not found. Please run 'python main.py config' for assistance.")
+        # Corrected the error message to use the 'burpdrop' command
+        logger.error("Required tools not found. Please run 'burpdrop config' for assistance.")
         return
     
     if not check_device_connection(adb_path):
@@ -109,7 +112,8 @@ def configure_flow(args, config):
                 logger.info(f"- {key}: {value}")
         else:
             logger.info("No paths configured yet.")
-        logger.info("\nTo set paths, use: python main.py config --adb \"/path/to/adb\"")
+        # Corrected the help message to use the 'burpdrop' command
+        logger.info("\nTo set paths, use: burpdrop config --adb \"/path/to/adb\"")
     
     save_config(new_config)
 

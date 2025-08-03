@@ -2,7 +2,7 @@ import json
 import os
 import platform
 import shutil
-from logger import Logger
+from .logger import Logger
 
 logger = Logger(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs"))
 

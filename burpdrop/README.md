@@ -1,11 +1,11 @@
 # 🔐 burpDrop – Cross-Platform Burp Suite CA Certificate Installer for Android
 
 [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-blue)](#)
-[![Python](https://img.shields.io/badge/Python-3.6%2B-blue)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/Python-3.7%2B-blue)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Author](https://img.shields.io/badge/Author-Gashaw%20Kidanu-orange)](#)
 
-**burpDrop** is a professional-grade automation tool that simplifies installing [Burp Suite](https://portswigger.net/burp) CA certificates into **rooted Android devices or emulators**.  
+**burpDrop** is a professional-grade automation tool that simplifies installing [Burp Suite](https://portswigger.net/burp) CA certificates into **rooted Android devices or emulators**.
 Built for **security professionals**, **pen testers**, and **mobile developers**, it automates certificate conversion, deployment, permission setting, and rebooting — all with robust logging and cross-platform support.
 
 ![burpDrop Workflow](https://via.placeholder.com/800x400?text=BurpDrop+Workflow+Diagram)
@@ -18,16 +18,18 @@ Built for **security professionals**, **pen testers**, and **mobile developers**
 - 🔁 Converts Burp CA cert (DER → PEM → `.0`) with subject hash
 - 📲 Pushes cert to `/system/etc/security/cacerts/` on Android device
 - 🔒 Verifies ADB and OpenSSL availability
-- 📦 Auto backup of existing cert with same hash
+- 📦 Automatically cleans up temporary certificate files on exit
 - 🧰 Interactive CLI with prompts and auto-validation
 - 📜 Timestamped logging to `logs/` directory
 - 🖥️ Cross-platform support: Windows, macOS, and Linux
+- 🤖 **Magisk support**: Installs certificates to the systemless Magisk path.
+- 🧪 **Dry-run mode**: Simulates the installation without making any changes.
 
 ---
 
 ## 📦 Requirements
 
-- Python **3.6+**
+- Python **3.7+**
 - [ADB (Android Debug Bridge)](https://developer.android.com/studio/releases/platform-tools)
 - [OpenSSL](https://www.openssl.org/) available in `PATH`
 - Rooted Android device or emulator (e.g., [Genymotion](https://www.genymotion.com/))
@@ -41,13 +43,12 @@ Built for **security professionals**, **pen testers**, and **mobile developers**
 
 ```bash
 pip install burpdrop
-
 ```
 
 ### Option 2: From source
 ```bash
-git clone https://github.com/Gashaw512/android-traffic-interception-guide
-cd android-traffic-interception-guide/scripts
+git clone [https://github.com/Gashaw512/android-traffic-interception-guide](https://github.com/Gashaw512/android-traffic-interception-guide)
+cd android-traffic-interception-guide/burpdrop
 pip install .
 
 ```
@@ -58,7 +59,7 @@ pip install .
 ### 1. Export your Burp certificate
 
 In **Burp Suite**:  
-`Proxy → Options → Import / Export CA Certificate`
+`Proxy → Proxy Settings/ Options → Import / Export CA Certificate`
 
 - Choose **DER format**
 - Save it as `burp.der`
@@ -70,7 +71,6 @@ In **Burp Suite**:
 - Enable **USB debugging** on your phone or emulator  
 - Ensure `adb` is accessible from your terminal (i.e., added to your system `PATH`)
 
----
 ---
 ### 3. Install the certificate
 
@@ -89,20 +89,23 @@ burpdrop install
 
 ```bash
 
-# Interactive install (prompt-based)
+# Standard interactive install (prompt-based)
 burpdrop install
 
-# Direct path install
-burpdrop install -c "/path/to/burp.der"
+# Install for Magisk systemless root
+burpdrop install --magisk
+
+# Simulate installation without making changes
+burpdrop install --dry-run
 
 # View recent logs
 burpdrop logs
 
-# Interactive configuration wizard
+# Interactive configuration wizard (to set adb/openssl paths)
 burpdrop config
 
-# Diagnostic tests (adb, root, cert, etc.)
-burpdrop diagnose
+# Set ADB and OpenSSL paths directly
+burpdrop config --adb "/path/to/adb" --openssl "/path/to/openssl"
 
 # Help
 burpdrop help
@@ -119,17 +122,24 @@ burpdrop help
 | ❌ Device not detected         | Run `adb devices` to confirm connection; ensure **USB debugging** is enabled |
 | ⚠️ `adb remount` fails        | Ensure your device/emulator is **rooted**. Use `adb root` if needed      |
 
+
+
+
+
+| Issue | Solution | |-------------------------------|--------------------------------------------------------------------------| | ❌ adb not found | Run burpdrop config to set the correct path | | ❌ Certificate conversion fails| Make sure OpenSSL is installed and the cert is in DER format | | ❌ Device not detected | Run adb devices to confirm connection; ensure USB debugging is enabled | | ⚠️ adb remount fails | Ensure your device/emulator is rooted. Use adb root if needed | | ❌ ImportError on local run | Ensure you are running with pip install . or using the wrapper scripts (burpDrop.sh/.bat) |
+
 > This will render as a neat table on GitHub. Let me know if you'd prefer a bullet list format or collapsible FAQs instead.
 ---
 ## 🔧 Configuration
 
-To set up or override tool paths:
+o set up or override tool paths, use the config command:
 
 ```bash
 
 burpdrop config
-Or edit config.json manually:
+
 ```
+You can also manually edit the config.json file located inside the installed package (e.g., site-packages/burpdrop/scripts/config.json).
 
 ```json
 

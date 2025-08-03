@@ -7,7 +7,6 @@ set PYTHONUTF8=1
 
 :: Get the directory of the batch file
 set "SCRIPT_DIR=%~dp0"
-set "PYTHON_SCRIPT=%SCRIPT_DIR%scripts\main.py"
 
 :: Check for Python
 where python >nul 2>&1
@@ -24,8 +23,8 @@ if %errorlevel% neq 0 (
     echo ⚠ Warning: Failed to install some dependencies
 )
 
-:: Launch the application
+:: Launch the application as a package
 echo 🚀 Starting burpDrop...
-python "%PYTHON_SCRIPT%" %*
+python -m scripts.main %*
 
 endlocal

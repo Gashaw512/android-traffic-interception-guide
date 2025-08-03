@@ -18,10 +18,8 @@ setup(
     long_description_content_type='text/markdown',
     url='https://github.com/Gashaw512/android-traffic-interception-guide',
     
-    # Use find_packages to discover the 'scripts' directory
     packages=find_packages(),
     
-    # Include non-Python files like config.json
     package_data={
         'scripts': ['config.json'],
     },

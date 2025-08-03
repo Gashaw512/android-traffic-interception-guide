@@ -2,7 +2,7 @@ import os
 import subprocess
 import time
 from collections import namedtuple
-from logger import Logger
+from .logger import Logger
 
 logger = Logger(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs"))
 
