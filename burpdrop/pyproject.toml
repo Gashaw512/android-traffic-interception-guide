@@ -2,16 +2,16 @@
 requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
-[project]
+[projepypi-AgEIcHlwaS5vcmcCJDY5MzMyYmMwLTYzYWMtNDA3My04MWZmLThmZDRiZWVjNjAxYQACKlszLCI1ZTFmZWExZC1mNWRmLTQyMzQtOWYyMy1kOGRlNDhmMGRkNTciXQAABiBVrGO_470lVYuNXxhN2oJaoJT4d7LTLoj4G0R_smEGkwct]
 name = "burpdrop"
-version = "1.1.0"
+version = "1.2.0"
 authors = [
   { name="Gashaw Kidanu", email="kidanugashaw@gmail.com" },
 ]
 description = "A cross-platform Burp Suite CA Certificate installer for Android devices"
 readme = "README.md"
 requires-python = ">=3.7"
-license = { file = "LICENSE" } # Corrected path to LICENSE
+license = { text = "MIT License" }  # This is the correct, non-deprecated way to specify the license.
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",

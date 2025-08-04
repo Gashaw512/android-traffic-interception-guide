@@ -11,8 +11,8 @@ CONFIG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config.j
 ADB_COMMON_PATHS_WIN = [
     os.path.join(os.environ.get('LOCALAPPDATA', ''), 'Android', 'Sdk', 'platform-tools', 'adb.exe'),
     os.path.join('C:\\', 'platform-tools', 'adb.exe')
-]
-ADB_COMMON_PATHS_NIX = [
+] 
+ADB_COMMON_PATHS_NIX = [ 
     '/usr/bin/adb',
     '/usr/local/bin/adb',
     os.path.join(os.environ.get('HOME', ''), 'Library', 'Android', 'sdk', 'platform-tools', 'adb')
